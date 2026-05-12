@@ -1,6 +1,6 @@
 # Streptomyces-sialometabolism
 
-#Dowload genomes
+##Dowload genomes
 ```
 datasets download genome taxon "Streptomyces" --reference --include protein
 
@@ -15,3 +15,21 @@ mv GCF_Streptomyces_ID ../../ & cd ../../
 #count file
 wc -l GCF_Streptomyces_ID
 ```
+## rename files based on directories and fasta header
+```
+bash rename_Strepto_files.sh
+ls ncbi_dataset/data/GCF*/ #check if everything is ok
+
+#rename fasta header
+```
+
+## Get report of genomes
+```
+datasets summary genome accession --inputfile GCF_Streptomyces_ID --as-json-lines | dataformat tsv genome > Streptomyces_GCF_summary
+
+#get unique rows and remove duplicates
+awk -F'\t' '!seen[$1]++' Streptomyces_GCF_summary > Streptomyces_GCF_summary_unique
+```
+
+
+
