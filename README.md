@@ -21,6 +21,9 @@ bash rename_Strepto_files.sh
 ls ncbi_dataset/data/GCF*/ #check if everything is ok
 
 #rename fasta header
+
+for file in GCF*/*faa; do mv $file ../; done #move files
+for f in *.faa; do sed -i "s/^>/>${f}_/" "$f"; done
 ```
 
 ## Get report of genomes
@@ -31,5 +34,7 @@ datasets summary genome accession --inputfile GCF_Streptomyces_ID --as-json-line
 awk -F'\t' '!seen[$1]++' Streptomyces_GCF_summary > Streptomyces_GCF_summary_unique
 ```
 
+# Creation of HMM models
 
+fasta files were retrieved from this [link](https://zenodo.org/records/20030591)
 
