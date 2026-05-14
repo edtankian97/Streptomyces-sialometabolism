@@ -1,10 +1,18 @@
 # Streptomyces-sialometabolism
 
 ## Tools to download
+
+Via conda 
+Ensure to create a new conda environment
 ```
 conda install bioconda::mafft==7.525 #mafft v. 7.525
 conda install bioconda::hmmer==3.4 #hmmer v. 3.4
 conda install bioconda::seqkit==2.13.0 #seqkit
+```
+Other resources: Download [nextflow](https://docs.seqera.io/nextflow/install) and [Docker](https://docs.docker.com/desktop/setup/install/linux/ubuntu/) for linux users
+
+```
+
 ```
 ##Dowload genomes
 ```
@@ -175,6 +183,27 @@ bash retrieve_seqs_interpro.sh
 ```
 Verify that the number of entries matches across files.
 ```
-wc -l *
+wc -l *_wo_header.tsv
 grep -c ">" *retrieved_now
+```
+Interproscan run
+```
+mkdir -p input_Interproscan
+cp *retrieved_now ./input_Interproscan
+```
+Download database
+```
+nextflow run ebi-pf-team/interproscan6 \
+  -r 6.0.0 \
+  -profile docker,test \
+  --datadir data \
+  --interpro latest
+```
+Run InterProScan v.6
+```
+nextflow run ebi-pf-team/interproscan6 \
+  -r 6.0.0 \
+  -profile docker \
+  --datadir data \
+  --input ./input_Interproscan/*retrieved_now
 ```
