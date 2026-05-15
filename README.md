@@ -199,11 +199,15 @@ nextflow run ebi-pf-team/interproscan6 \
   --datadir data \
   --interpro latest
 ```
-Run InterProScan v.6
+Run InterProScan v.6 for each sample
+Example for target_IDs_nagA_curado_mafft_wo_header.tsv_retrieved_now file
 ```
+cd input_Interproscan
 nextflow run ebi-pf-team/interproscan6 \
   -r 6.0.0 \
   -profile docker \
   --datadir data \
-  --input ./input_Interproscan/*retrieved_now
+--outdir Interpro_results \
+  --input target_IDs_nagA_curado_mafft_wo_header.tsv_retrieved_now
 ```
+Change input file in --input flag to run the other samples
