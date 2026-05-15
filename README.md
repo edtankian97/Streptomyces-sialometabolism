@@ -206,7 +206,7 @@ cd input_Interproscan
 nextflow run ebi-pf-team/interproscan6 \
   -r 6.0.0 \
   -profile docker \
-  --datadir data \
+  --datadir ../data \
 --outdir Interpro_results \
   --input target_IDs_nagA_curado_mafft_wo_header.tsv_retrieved_now
 ```
